@@ -6,7 +6,7 @@ def print_hi(name):
     print(f'Hi, {name}')  # Press Strg+F8 to toggle the breakpoint.
 
 
-class DsaRoller():
+class DsaRoller:
     def __init__(self, val1, val2, val3, mod=0):
         self.roll_list = []
         self.val1 = val1 + mod
@@ -56,13 +56,29 @@ class DsaRoller():
         return pass_possibility
 
 
+def chances(val1, val2, val3, level=0):
+    return [[mod, DsaRoller(val1, val2, val3, mod).pass_possibility()[level][1]] for mod in range(-5, 6)]
+
+
+def print_chances(val1, val2, val3, level=0, ability=""):
+    chance_list = chances(val1, val2, val3, level)
+    output = "\n".join([" -> ".join([str(elem) for elem in sublist]) for sublist in chance_list])
+    print(ability)
+    print("values: {0}, {1}, {2}; ability level: {3}".format(val1, val2, val3, level))
+    print(output)
+
+
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    print_hi('PyCharm')
-    A = DsaRoller(15, 14, 14, mod=0)
+    A = DsaRoller(11, 11, 10, mod=0)
     b = A.ability_check()
     pass_list = A.pass_counts()
     pass_poss = A.pass_possibility()
+
+    print_chances(14, 14, 15, level=12, ability="Taschendiebstahl")
+    print_chances(14, 14, 15, level=14, ability="Taschendiebstahl")
+    print_chances(10, 11, 11, level=10, ability="Sinnenschärfe")
+
 
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/
 
